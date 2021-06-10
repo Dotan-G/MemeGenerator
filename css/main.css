@@ -1,0 +1,96 @@
+body {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+nav {
+    background-color: #ff7f00;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo {
+    margin-inline-start: 5rem;
+    margin-inline-end: auto;
+}
+
+.logo img {
+    width: 10rem;
+}
+
+nav ul {
+    display: flex;
+    margin-inline-end: 5rem;
+}
+
+nav ul li {
+    list-style: none;
+    margin-inline-start: 8rem;
+}
+
+nav ul li a {
+    color: black;
+    text-decoration: none;
+}
+
+/* gallery */
+
+.gallery {
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start
+}
+
+.gallery div {
+    flex-basis: 12rem;
+    text-align: center;
+}
+
+.gallery img {
+    width: 11rem;
+    margin: 1rem;
+}
+
+/* ganerator */
+
+.ganerator {
+    display: none;
+    background-color: lightgray;
+}
+
+.canvas-container canvas {
+    margin: 1rem;
+    border: 2px solid black;
+    background: rgb(238, 225, 225);
+}
+
+.ganerator section {
+    width: 20rem;
+    margin: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.ganerator section input {
+    margin-bottom: 1rem;
+    width: 15rem;
+    height: 2rem;
+    border-radius: 0.5rem;
+    border: 0;
+}
+
+.ganerator section button{
+    background-color: white;
+    border: 0;
+    border-radius: 1rem;
+    cursor: pointer;
+}
+
+.ganerator section button img {
+    width: 3rem;
+}

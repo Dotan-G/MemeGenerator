@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/main.css">
+    <title>Meme Generator</title>
+</head>
+
+<body onload="init()">
+    <div class="navbar">
+        <nav>
+            <div class="logo"><img src="img/LOGO/Layer 2_logo/Layer 2@3x.png" alt=""></div>
+            <ul>
+                <li><a class="Gallery" href="#" onclick="onGoBack()">Gallery</a></li>
+                <li><a href="">About</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <main class="container">
+        <div class="gallery">
+            <div><img src="img/meme-imgs (square)/1.jpg" alt="" onclick="onImgClick(this)"></div>
+            <div><img src="img/meme-imgs (square)/2.jpg" alt="" onclick="onImgClick(this)"></div>
+            <div><img src="img/meme-imgs (square)/3.jpg" alt="" onclick="onImgClick(this)"></div>
+            <div><img src="img/meme-imgs (square)/4.jpg" alt="" onclick="onImgClick(this)"></div>
+            <div><img src="img/meme-imgs (square)/5.jpg" alt="" onclick="onImgClick(this)"></div>
+            <div><img src="img/meme-imgs (square)/6.jpg" alt="" onclick="onImgClick(this)"></div>
+            <div><img src="img/meme-imgs (square)/7.jpg" alt="" onclick="onImgClick(this)"></div>
+            <div><img src="img/meme-imgs (square)/8.jpg" alt="" onclick="onImgClick(this)"></div>
+            <div><img src="img/meme-imgs (square)/9.jpg" alt="" onclick="onImgClick(this)"></div>
+            <div><img src="img/meme-imgs (square)/10.jpg" alt="" onclick="onImgClick(this)"></div>
+            <div><img src="img/meme-imgs (square)/11.jpg" alt="" onclick="onImgClick(this)"></div>
+            <div><img src="img/meme-imgs (square)/12.jpg" alt="" onclick="onImgClick(this)"></div>
+            <div><img src="img/meme-imgs (square)/13.jpg" alt="" onclick="onImgClick(this)"></div>
+            <div><img src="img/meme-imgs (square)/14.jpg" alt="" onclick="onImgClick(this)"></div>
+            <div><img src="img/meme-imgs (square)/15.jpg" alt="" onclick="onImgClick(this)"></div>
+            <div><img src="img/meme-imgs (square)/16.jpg" alt="" onclick="onImgClick(this)"></div>
+        </div>
+
+        <div class="ganerator">
+            <!-- <button class="go-back" onclick="onGoBack()">Go Back To Gallery</button> -->
+            <div class="canvas-container">
+                <canvas height="500" width="500">
+                    YOUR BROWSER IS NOT SUPPORT
+                </canvas>
+            </div>
+            <section>
+                <div class="input">
+                    <input class="text-on-meme" type="text" placeholder="enter text"
+                        onchange="drawText(this.value, 250, 100)">
+                </div>
+                <div class="text-position">
+                    <button><img src="img/ICONS/up-and-down-opposite-double-arrows-side-by-side.png" alt=""></button>
+                    <button><img src="img/ICONS/add.png" alt=""></button>
+                    <button onclick="clearCanvas()"><img src="img/ICONS/trash.png" alt=""></button>
+                </div>
+                <div class="text-style">
+                    <div>
+                        <button><img src="img/ICONS/increase font - icon.png" alt=""></button>
+                        <button><img src="img/ICONS/decrease font - icon.png" alt=""></button>
+                        <button><img src="img/ICONS/align-to-left.png" alt=""></button>
+                        <button><img src="img/ICONS/center-text-alignment.png" alt=""></button>
+                        <button><img src="img/ICONS/align-to-right.png" alt=""></button>
+                    </div>
+                    <div>
+                        <select name="" id="">
+                            <option value="">Impact</option>
+                            <option value="">lorem</option>
+                        </select>
+                        <button><img src="img/ICONS/text stroke.png" alt=""></button>
+                        <button><img src="img/ICONS/paint-board-and-brush.png" alt=""></button>
+                    </div>
+                </div>
+                <div class="download">
+                    <a href="#" download="file-name" onclick="downloadCanvas(this)">Downlod</a>
+                    <a href="#">Share</a>
+                    <a href="#">Save</a>
+                </div>
+            </section>
+        </div>
+
+    </main>
+
+
+
+
+    <script src="js/main.js"></script>
+
+</body>
+
+</html>
