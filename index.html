@@ -21,6 +21,17 @@
     </div>
 
     <main class="container">
+        <div class="search-container">
+            <input type="search" placeholder="search">
+            <div class="most-search">
+                <span>funny</span>
+                <span>comics</span>
+                <span>dogs</span>
+                <span>drinks</span>
+                <span>books</span>
+            </div>
+        </div>
+
         <div class="gallery">
             <div><img src="img/meme-imgs (square)/1.jpg" alt="" onclick="onImgClick(this)"></div>
             <div><img src="img/meme-imgs (square)/2.jpg" alt="" onclick="onImgClick(this)"></div>
@@ -49,11 +60,13 @@
             </div>
             <section>
                 <div class="input">
-                    <input class="text-on-meme" type="text" placeholder="enter text"
-                        onchange="drawText(this.value, 250, 100)">
+                    <input class="text-on-meme" type="text" placeholder="enter text" onchange="onEnterText(this.value)">
                 </div>
                 <div class="text-position">
-                    <button><img src="img/ICONS/up-and-down-opposite-double-arrows-side-by-side.png" alt=""></button>
+                    <button>
+                        <img src="img/ICONS/up-and-down-opposite-double-arrows-side-by-side.png" alt=""
+                            onclick="onChangeLinePos()">
+                    </button>
                     <button><img src="img/ICONS/add.png" alt=""></button>
                     <button onclick="clearCanvas()"><img src="img/ICONS/trash.png" alt=""></button>
                 </div>
@@ -81,12 +94,19 @@
                 </div>
             </section>
         </div>
-
     </main>
 
+    <section class="about">
+
+    </section>
+
+    <footer>
+        <p>memegen</p>
+        <p>copyrights</p>
+    </footer>
 
 
-
+    <script src="js/service/canvas-service.js"></script>
     <script src="js/main.js"></script>
 
 </body>

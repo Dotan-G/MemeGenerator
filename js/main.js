@@ -1,11 +1,9 @@
 'use strict'
 
-var gCanvas;
-var gCtx;
+var gLine = 100;
 
 function init() {
-    gCanvas = document.querySelector('canvas')
-    gCtx = gCanvas.getContext('2d')
+    createCanvas()
 }
 
 function onImgClick(elImg) {
@@ -17,18 +15,6 @@ function onImgClick(elImg) {
     drawImg(elImg)
 }
 
-
-function drawText(text, x, y) {
-    gCtx.lineWidth = 2
-    gCtx.strokeStyle = 'black'
-    gCtx.fillStyle = 'white'
-    gCtx.font = '100px Impact'
-    gCtx.textAlign = 'center'
-    gCtx.fillText(text, x, y)
-    gCtx.strokeText(text, x, y)
-    console.log('text', text);
-}
-
 function onGoBack() {
     var elGenaretor = document.querySelector('.ganerator')
     elGenaretor.style.display = 'none';
@@ -37,23 +23,15 @@ function onGoBack() {
     clearCanvas()
 }
 
-function clearCanvas() {
-    gCtx.clearRect(0, 0, gCanvas.width, gCanvas.height)
+function onEnterText(inputText) {
+    var elCanvas = document.querySelector('canvas')
+    const width = elCanvas.width;
+    const height = elCanvas.height;
+    drawText(inputText, width / 2, gLine)
 }
 
-function drawImg(elImg) {
-    gCtx.drawImage(elImg, 0, 0, gCanvas.width, gCanvas.height)
-}
-
-function resizeCanvas() {
-    var elContainer = document.querySelector('.canvas-container');
-    gCanvas.width = elContainer.offsetWidth
-    gCanvas.height = elContainer.offsetHeight
-}
-
-function downloadCanvas(elLink) {
-    // console.log('elLink', elLink);
-    const data = gCanvas.toDataURL()
-    elLink.href = data
-    elLink.download = 'name'
+function onChangeLinePos() {
+    var elCanvas = document.querySelector('canvas')
+    gLine = elCanvas.height - 100;
+    console.log('gLine', gLine);
 }

@@ -35,13 +35,21 @@ nav ul li a {
     text-decoration: none;
 }
 
+/* search */
+.search-container {
+    display: flex;
+    padding: 2rem;
+    justify-content: space-between;
+}
+
 /* gallery */
 
 .gallery {
     margin: auto;
     display: flex;
     flex-wrap: wrap;
-    justify-content: flex-start
+    justify-content: flex-start;
+    background-color: lightgray;
 }
 
 .gallery div {
@@ -52,6 +60,19 @@ nav ul li a {
 .gallery img {
     width: 11rem;
     margin: 1rem;
+}
+
+/* ABOUT */
+.about {
+    background-color: #fff;
+    height: 20vh;
+}
+
+/* FOOTER */
+footer {
+    text-align: center;
+    background-color: #ff7f00;
+    padding: 3rem;
 }
 
 /* ganerator */
