@@ -5,22 +5,44 @@ var gIdx = 0;
 
 function init() {
     createCanvas()
+    renderGallery()
+}
+
+function renderGallery() {
+    var images = getImages()
+    var strHTMLs = images.map((image) => {
+        return `
+        <div>
+            <img id=${image.id} src="${image.url}"" onclick="onImgClick(this)">
+        </div>`
+    })
+    var elGallery = document.querySelector('.gallery')
+    elGallery.innerHTML = strHTMLs.join('');
 }
 
 function onImgClick(elImg) {
-    gElImg = saveElImg(elImg)
+    gElImg = elImg;
+    changeMemeImgId(elImg.id)
     var elGenaretor = document.querySelector('.ganerator')
     elGenaretor.style.display = 'flex';
     var elGallery = document.querySelector('.gallery')
     elGallery.style.display = 'none';
     resizeCanvas()
-    drawImg(gElImg)
+    drawImg(elImg)
 }
 
 function onAddLine() {
     clearInput()
-    gIdx++
-    return gIdx
+    var meme = getMeme();
+    meme.lines.push({
+        txt: '',
+        size: 60,
+        align: 'center',
+        color: 'white',
+        strokeColor: 'black',
+        font: 'Impact'
+    });
+    changeMemeLineIdx(1)
 }
 
 function onGoBack() {
@@ -34,39 +56,68 @@ function onGoBack() {
 function onEnterText(inputText) {
     clearCanvas()
     drawImg(gElImg)
-    var lines = getLines();
-    lines[gIdx] = inputText;
+    var meme = getMeme();
+    var lineIdx = meme.selectedLineIdx
+    meme.lines[lineIdx].txt = inputText;
     drewTextOnCanvas()
 }
 
 function onChangeLinePos() {
     var input = document.querySelector('.text-on-meme')
-    var lines = getLine();
-    var x = gIdx
-    input.value = lines[--gIdx]
+    var meme = getMeme();
+    var diff;
+    if (!meme.selectedLineIdx) {
+        diff = 1
+    } else if (meme.selectedLineIdx = meme.lines.length - 1) {
+        diff = -1
+    }
+    input.value = meme.lines[meme.selectedLineIdx + diff].txt
 }
 
 function onTrachClick() {
-    var input = document.querySelector('.text-on-meme')
-    var lines = getLines();
-    if (!lines || !lines.length) return
-    var lineIdx = lines.findIndex((line) => {
-        console.log('input.value', input.value);
-        return line === input.value
-    })
-    lines.splice(lineIdx, 1)
-    --gIdx
-    if (!lines.length) clearInput()
+    var meme = getMeme();
+    var lineIdx = meme.selectedLineIdx
+    var memeLines = meme.lines
+    if (!lineIdx) {
+        memeLines[lineIdx].txt = '';
+        clearInput()
+    } else {
+        var lineIdx = memeLines.findIndex((line) => {
+            line.txt === memeLines[lineIdx].txt
+        })
+        memeLines.splice(lineIdx, 1)
+        changeMemeLineIdx(-1)
+    }
+    renderCanvas()
+}
+
+function onChangeFontSize(diff) {
+    var meme = getMeme();
+    changeFontSize(diff, meme.selectedLineIdx);
+    renderCanvas()
+}
+
+function onChangeFont(elFont) {
+    var meme = getMeme()
+    var idx = meme.selectedLineIdx
+    changeFont(elFont, idx)
+    renderCanvas()
+}
+
+function renderCanvas() {
     clearCanvas()
     drawImg(gElImg)
     drewTextOnCanvas()
 }
 
-function checkevent(ev) {
-    console.log('ev', ev);
+function onChangeStrokeColor(elButton) {
+    console.log('elButtons', elButton);
 }
 
-function onChangeFontSize(diff) {
-    changeFontSize(diff);
-    onEnterText(inputText)
+function onDownloadCanvas(elLink) {
+    downloadCanvas(elLink)
+}
+
+function checkevent(ev) {
+    console.log('ev', ev);
 }

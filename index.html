@@ -10,6 +10,7 @@
 </head>
 
 <body onload="init()">
+
     <div class="navbar">
         <nav>
             <div class="logo"><img src="img/LOGO/Layer 2_logo/Layer 2@3x.png" alt=""></div>
@@ -21,6 +22,7 @@
     </div>
 
     <main class="container">
+
         <div class="search-container">
             <input type="search" placeholder="search">
             <div class="most-search">
@@ -33,22 +35,6 @@
         </div>
 
         <div class="gallery">
-            <div><img src="img/meme-imgs (square)/1.jpg" alt="" onclick="onImgClick(this)"></div>
-            <div><img src="img/meme-imgs (square)/2.jpg" alt="" onclick="onImgClick(this)"></div>
-            <div><img src="img/meme-imgs (square)/3.jpg" alt="" onclick="onImgClick(this)"></div>
-            <div><img src="img/meme-imgs (square)/4.jpg" alt="" onclick="onImgClick(this)"></div>
-            <div><img src="img/meme-imgs (square)/5.jpg" alt="" onclick="onImgClick(this)"></div>
-            <div><img src="img/meme-imgs (square)/6.jpg" alt="" onclick="onImgClick(this)"></div>
-            <div><img src="img/meme-imgs (square)/7.jpg" alt="" onclick="onImgClick(this)"></div>
-            <div><img src="img/meme-imgs (square)/8.jpg" alt="" onclick="onImgClick(this)"></div>
-            <div><img src="img/meme-imgs (square)/9.jpg" alt="" onclick="onImgClick(this)"></div>
-            <div><img src="img/meme-imgs (square)/10.jpg" alt="" onclick="onImgClick(this)"></div>
-            <div><img src="img/meme-imgs (square)/11.jpg" alt="" onclick="onImgClick(this)"></div>
-            <div><img src="img/meme-imgs (square)/12.jpg" alt="" onclick="onImgClick(this)"></div>
-            <div><img src="img/meme-imgs (square)/13.jpg" alt="" onclick="onImgClick(this)"></div>
-            <div><img src="img/meme-imgs (square)/14.jpg" alt="" onclick="onImgClick(this)"></div>
-            <div><img src="img/meme-imgs (square)/15.jpg" alt="" onclick="onImgClick(this)"></div>
-            <div><img src="img/meme-imgs (square)/16.jpg" alt="" onclick="onImgClick(this)"></div>
         </div>
 
         <div class="ganerator">
@@ -81,30 +67,46 @@
                         <button><img src="img/ICONS/align-to-right.png" alt=""></button>
                     </div>
                     <div>
-                        <select name="" id="">
-                            <option value="">Impact</option>
-                            <option value="">lorem</option>
+                        <select name="" id="" onchange="onChangeFont(this.value)">
+                            <option value="Impact">Impact</option>
+                            <option value="Arial">Arial</option>
+                            <option value="Verdana">Verdana</option>
+                            <option value="Georgia">Georgia</option>
                         </select>
-                        <button><img src="img/ICONS/text stroke.png" alt=""></button>
-                        <button><img src="img/ICONS/paint-board-and-brush.png" alt=""></button>
+                        <button onclick="onChangeStrokeColor(event)"><img src="img/ICONS/text stroke.png" alt=""><input
+                                class="select-stroke-color" type="color"></button>
+                        <button><img src="img/ICONS/paint-board-and-brush.png" alt=""><input type="color"></button>
                     </div>
                 </div>
                 <div class="download">
-                    <a href="#" download="file-name" onclick="downloadCanvas(this)">Downlod</a>
+                    <a href="#" download="file-name" onclick="onDownloadCanvas(this)">Downlod</a>
                     <a href="#">Share</a>
                     <a href="#">Save</a>
                 </div>
             </section>
         </div>
+
     </main>
 
     <section class="about">
+
+        <article>
+            <img src="img/alina/alina-kovalchuk-Cd7dYdJKIKk-unsplash@2x.jpg" alt="">
+        </article>
+        <div>
+            <h2>Monica Geller</h2>
+            <p>is a fictional character, one of the six main characters who appears on the American sitcom Friends
+                (1994–2004). Created by David Crane and Marta Kauffman</p>
+            <button><img src="img/socials_logo/facebook/facebook-logo copy 2@3x.png" alt=""></button>
+            <button><img src="img/socials_logo/github/github-logo@3x.png" alt=""></button>
+            <button><img src="img/socials_logo/linkedin/linkedin-logo@3x.png" alt=""></button>
+        </div>
 
     </section>
 
     <footer>
         <p>memegen</p>
-        <p>copyrights</p>
+        <p>all rights reserved 2021</p>
     </footer>
 
 

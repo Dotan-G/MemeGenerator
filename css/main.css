@@ -64,8 +64,37 @@ nav ul li a {
 
 /* ABOUT */
 .about {
+    display: flex;
+    align-items: center;
     background-color: #fff;
-    height: 20vh;
+    height: 600px;
+    padding-left: 150px;
+}
+
+.about article img {
+    width: 322px;
+    height: 322px;
+    margin: 0 38px 0 0;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.about div {
+    padding: 50px;
+    padding-right: 150px;
+}
+.about div button {
+    height: 45px;
+    width: 45px;
+    background-color: #ff7f00;
+    border: 0;
+    border-radius: 2px;
+}
+
+.about div button img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
 }
 
 /* FOOTER */
@@ -115,3 +144,10 @@ footer {
 .ganerator section button img {
     width: 3rem;
 }
+
+.select-stroke-color {
+    width: 10rem;
+}
+
+/* ABOUT */
+

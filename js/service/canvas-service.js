@@ -9,28 +9,29 @@ function createCanvas() {
 }
 
 function drewTextOnCanvas() {
-    var fontSize = getFontSize()
-    var lineArr = getLines();
-    lineArr.forEach((line, idx) => {
+    var memeLines = getMeme().lines;
+    memeLines.forEach((memeTxt, idx) => {
         const pos = (!idx) ? 'top' : 'bottom';
         const width = gCanvas.width;
         const height = gCanvas.height;
         if (!idx) {
-            drawRect(0, 0, width, 102)
-            drawText(line, width / 2, idx * height, pos, fontSize)
+            drawRect(0, 0, width, memeLines[idx].size)
+            drawText(memeTxt.txt, width / 2, idx * height, pos, memeLines[idx].size,
+                memeLines[idx].color, memeLines[idx].strokeColor, memeLines[idx].font)
         }
         else {
-            drawRect(0, (1 / idx * height) - 100, width, 100)
-            drawText(line, width / 2, 1 / idx * height, pos, fontSize)
+            drawRect(0, (1 / idx * height) - memeLines[idx].size, width, memeLines[idx].size)
+            drawText(memeTxt.txt, width / 2, 1 / idx * height, pos, memeLines[idx].size,
+                memeLines[idx].color, memeLines[idx].strokeColor, memeLines[idx].font)
         }
     })
 }
 
-function drawText(text, x, y, baseline, fontSize) {
+function drawText(text, x, y, baseline, fontSize, textColor, stokeColor, fontStyle) {
     gCtx.lineWidth = 2
-    gCtx.strokeStyle = 'black'
-    gCtx.fillStyle = 'white'
-    gCtx.font = `${fontSize}px Impact`
+    gCtx.strokeStyle = `${stokeColor}`
+    gCtx.fillStyle = `${textColor}`
+    gCtx.font = `${fontSize}px ${fontStyle}`
     gCtx.textBaseline = baseline;
     gCtx.textAlign = 'center'
     gCtx.fillText(text, x, y)
@@ -54,7 +55,7 @@ function resizeCanvas() {
 function downloadCanvas(elLink) {
     const data = gCanvas.toDataURL()
     elLink.href = data
-    elLink.download = 'name'
+    elLink.download = 'name.png'
 }
 
 function drawRect(x, y, a, b) {
