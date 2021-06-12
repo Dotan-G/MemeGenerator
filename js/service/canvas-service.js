@@ -10,7 +10,6 @@ function createCanvas() {
 
 function alignOnCanvas(memeLine, idx, width) {
     var x = gCtx.measureText(memeLine[idx].txt)
-    console.log('x', x);
     let align;
     if (memeLine[idx].align === 'center') align = width / 2;
     if (memeLine[idx].align === 'left') align = 0;
