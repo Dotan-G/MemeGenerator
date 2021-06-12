@@ -1,6 +1,5 @@
 'use strict'
 
-
 var gCanvas;
 var gCtx;
 
@@ -9,15 +8,33 @@ function createCanvas() {
     gCtx = gCanvas.getContext('2d')
 }
 
-function drawText(text, x, y) {
+function drewTextOnCanvas() {
+    var fontSize = getFontSize()
+    var lineArr = getLines();
+    lineArr.forEach((line, idx) => {
+        const pos = (!idx) ? 'top' : 'bottom';
+        const width = gCanvas.width;
+        const height = gCanvas.height;
+        if (!idx) {
+            drawRect(0, 0, width, 102)
+            drawText(line, width / 2, idx * height, pos, fontSize)
+        }
+        else {
+            drawRect(0, (1 / idx * height) - 100, width, 100)
+            drawText(line, width / 2, 1 / idx * height, pos, fontSize)
+        }
+    })
+}
+
+function drawText(text, x, y, baseline, fontSize) {
     gCtx.lineWidth = 2
     gCtx.strokeStyle = 'black'
     gCtx.fillStyle = 'white'
-    gCtx.font = '100px Impact'
+    gCtx.font = `${fontSize}px Impact`
+    gCtx.textBaseline = baseline;
     gCtx.textAlign = 'center'
     gCtx.fillText(text, x, y)
     gCtx.strokeText(text, x, y)
-    console.log('text', text);
 }
 
 function clearCanvas() {
@@ -35,8 +52,16 @@ function resizeCanvas() {
 }
 
 function downloadCanvas(elLink) {
-    // console.log('elLink', elLink);
     const data = gCanvas.toDataURL()
     elLink.href = data
     elLink.download = 'name'
+}
+
+function drawRect(x, y, a, b) {
+    gCtx.beginPath()
+    gCtx.rect(x, y, a, b)
+    // gCtx.fillStyle = 'orange'
+    // gCtx.fillRect(x, y, a, b)
+    gCtx.strokeStyle = 'black'
+    gCtx.stroke()
 }

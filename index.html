@@ -54,26 +54,28 @@
         <div class="ganerator">
             <!-- <button class="go-back" onclick="onGoBack()">Go Back To Gallery</button> -->
             <div class="canvas-container">
-                <canvas height="500" width="500">
+                <canvas height="500" width="500" onclick="checkevent(event.offsetY)">
                     YOUR BROWSER IS NOT SUPPORT
                 </canvas>
             </div>
             <section>
                 <div class="input">
-                    <input class="text-on-meme" type="text" placeholder="enter text" onchange="onEnterText(this.value)">
+                    <input class="text-on-meme" type="text" placeholder="enter text" oninput="onEnterText(this.value)">
                 </div>
                 <div class="text-position">
                     <button>
                         <img src="img/ICONS/up-and-down-opposite-double-arrows-side-by-side.png" alt=""
                             onclick="onChangeLinePos()">
                     </button>
-                    <button><img src="img/ICONS/add.png" alt=""></button>
-                    <button onclick="clearCanvas()"><img src="img/ICONS/trash.png" alt=""></button>
+                    <button><img src="img/ICONS/add.png" alt="" onclick="onAddLine()"></button>
+                    <button onclick="onTrachClick()"><img src="img/ICONS/trash.png" alt=""></button>
                 </div>
                 <div class="text-style">
                     <div>
-                        <button><img src="img/ICONS/increase font - icon.png" alt=""></button>
-                        <button><img src="img/ICONS/decrease font - icon.png" alt=""></button>
+                        <button><img src="img/ICONS/increase font - icon.png" alt=""
+                                onclick="onChangeFontSize(+2)"></button>
+                        <button><img src="img/ICONS/decrease font - icon.png" alt=""
+                                onclick="onChangeFontSize(-2)"></button>
                         <button><img src="img/ICONS/align-to-left.png" alt=""></button>
                         <button><img src="img/ICONS/center-text-alignment.png" alt=""></button>
                         <button><img src="img/ICONS/align-to-right.png" alt=""></button>
@@ -107,6 +109,7 @@
 
 
     <script src="js/service/canvas-service.js"></script>
+    <script src="js/service/main-service.js"></script>
     <script src="js/main.js"></script>
 
 </body>
