@@ -27,9 +27,9 @@ function drewTextOnCanvas() {
     })
 }
 
-function drawText(text, x, y, baseline, fontSize, textColor, stokeColor, fontStyle) {
+function drawText(text, x, y, baseline, fontSize, textColor, strokeColor, fontStyle) {
     gCtx.lineWidth = 2
-    gCtx.strokeStyle = `${stokeColor}`
+    gCtx.strokeStyle = `${strokeColor}`
     gCtx.fillStyle = `${textColor}`
     gCtx.font = `${fontSize}px ${fontStyle}`
     gCtx.textBaseline = baseline;

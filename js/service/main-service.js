@@ -146,3 +146,9 @@ function changeFontSize(diff, lineIdx) {
 function changeFont(font, lineIdx) {
     return gMeme.lines[lineIdx].font = font;
 }
+function changeStrokeColor(value, lineIdx) {
+    return gMeme.lines[lineIdx].strokeColor = value;
+}
+function changeTextColor(value, lineIdx) {
+    return gMeme.lines[lineIdx].color = value;
+}

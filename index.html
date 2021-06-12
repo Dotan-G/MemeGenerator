@@ -16,6 +16,9 @@
             <div class="logo"><img src="img/LOGO/Layer 2_logo/Layer 2@3x.png" alt=""></div>
             <ul>
                 <li><a class="Gallery" href="#" onclick="onGoBack()">Gallery</a></li>
+                <div class="seperator"></div>
+                <li><a class="memes" href="#">Memes</a></li>
+                <div class="seperator"></div>
                 <li><a href="">About</a></li>
             </ul>
         </nav>
@@ -24,7 +27,7 @@
     <main class="container">
 
         <div class="search-container">
-            <input type="search" placeholder="search">
+            <input class="search-input" type="search" placeholder="search">
             <div class="most-search">
                 <span>funny</span>
                 <span>comics</span>
@@ -38,7 +41,6 @@
         </div>
 
         <div class="ganerator">
-            <!-- <button class="go-back" onclick="onGoBack()">Go Back To Gallery</button> -->
             <div class="canvas-container">
                 <canvas height="500" width="500" onclick="checkevent(event.offsetY)">
                     YOUR BROWSER IS NOT SUPPORT
@@ -73,9 +75,14 @@
                             <option value="Verdana">Verdana</option>
                             <option value="Georgia">Georgia</option>
                         </select>
-                        <button onclick="onChangeStrokeColor(event)"><img src="img/ICONS/text stroke.png" alt=""><input
-                                class="select-stroke-color" type="color"></button>
-                        <button><img src="img/ICONS/paint-board-and-brush.png" alt=""><input type="color"></button>
+                        <button>
+                            <input class="select-stroke-color" type="color" oninput="onChangeStrokeColor(this.value)">
+                            <img src="img/ICONS/text stroke.png" alt="">
+                        </button>
+                        <button>
+                            <input class="select-text-color" type="color" oninput="onChangeTextColor(this.value)">
+                            <img src="img/ICONS/paint-board-and-brush.png" alt="">
+                        </button>
                     </div>
                 </div>
                 <div class="download">
@@ -93,13 +100,15 @@
         <article>
             <img src="img/alina/alina-kovalchuk-Cd7dYdJKIKk-unsplash@2x.jpg" alt="">
         </article>
-        <div>
+        <div class="about-info">
             <h2>Monica Geller</h2>
             <p>is a fictional character, one of the six main characters who appears on the American sitcom Friends
                 (1994–2004). Created by David Crane and Marta Kauffman</p>
-            <button><img src="img/socials_logo/facebook/facebook-logo copy 2@3x.png" alt=""></button>
-            <button><img src="img/socials_logo/github/github-logo@3x.png" alt=""></button>
-            <button><img src="img/socials_logo/linkedin/linkedin-logo@3x.png" alt=""></button>
+            <div class="social-links">
+                <button><img src="img/socials_logo/facebook/facebook-logo copy 2@3x.png" alt=""></button>
+                <button><img src="img/socials_logo/github/github-logo@3x.png" alt=""></button>
+                <button><img src="img/socials_logo/linkedin/linkedin-logo@3x.png" alt=""></button>
+            </div>
         </div>
 
     </section>

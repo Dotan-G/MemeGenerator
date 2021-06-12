@@ -1,7 +1,6 @@
 'use strict'
 
 var gElImg;
-var gIdx = 0;
 
 function init() {
     createCanvas()
@@ -110,8 +109,17 @@ function renderCanvas() {
     drewTextOnCanvas()
 }
 
-function onChangeStrokeColor(elButton) {
-    console.log('elButtons', elButton);
+function onChangeStrokeColor(value) {
+    var meme = getMeme()
+    var idx = meme.selectedLineIdx
+    changeStrokeColor(value, idx)
+    renderCanvas()
+}
+function onChangeTextColor(value) {
+    var meme = getMeme()
+    var idx = meme.selectedLineIdx
+    changeTextColor(value, idx)
+    renderCanvas()
 }
 
 function onDownloadCanvas(elLink) {
