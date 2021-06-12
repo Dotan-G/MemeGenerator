@@ -31,6 +31,8 @@ function onImgClick(elImg) {
 }
 
 function onAddLine() {
+    var input = document.querySelector('.text-on-meme')
+    if (!input.value) return
     clearInput()
     var meme = getMeme();
     meme.lines.push({
@@ -119,6 +121,13 @@ function onChangeTextColor(value) {
     var meme = getMeme()
     var idx = meme.selectedLineIdx
     changeTextColor(value, idx)
+    renderCanvas()
+}
+
+function onChangeAlign(align) {
+    var meme = getMeme()
+    var idx = meme.selectedLineIdx
+    changeAlign(align, idx)
     renderCanvas()
 }
 

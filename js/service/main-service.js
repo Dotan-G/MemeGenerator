@@ -1,7 +1,6 @@
 'use strict'
 
 var gId = 1;
-// var gFontSize = 100;
 var gImgs = [
     {
         id: gId,
@@ -94,7 +93,8 @@ var gMeme = {
             align: 'center',
             color: 'white',
             strokeColor: 'black',
-            font: 'Impact'
+            font: 'Impact',
+            align: 'center'
         }
     ]
 }
@@ -141,14 +141,18 @@ function getFontSize() {
 }
 
 function changeFontSize(diff, lineIdx) {
-    return gMeme.lines[lineIdx].size += diff
+    gMeme.lines[lineIdx].size += diff
 }
 function changeFont(font, lineIdx) {
-    return gMeme.lines[lineIdx].font = font;
+    gMeme.lines[lineIdx].font = font;
 }
 function changeStrokeColor(value, lineIdx) {
-    return gMeme.lines[lineIdx].strokeColor = value;
+    gMeme.lines[lineIdx].strokeColor = value;
 }
 function changeTextColor(value, lineIdx) {
-    return gMeme.lines[lineIdx].color = value;
+    gMeme.lines[lineIdx].color = value;
+}
+
+function changeAlign(align, idx) {
+    gMeme.lines[idx].align = align
 }

@@ -62,11 +62,18 @@
                     <div>
                         <button><img src="img/ICONS/increase font - icon.png" alt=""
                                 onclick="onChangeFontSize(+2)"></button>
-                        <button><img src="img/ICONS/decrease font - icon.png" alt=""
+                        <button>
+                            <img src="img/ICONS/decrease font - icon.png" alt=""
                                 onclick="onChangeFontSize(-2)"></button>
-                        <button><img src="img/ICONS/align-to-left.png" alt=""></button>
-                        <button><img src="img/ICONS/center-text-alignment.png" alt=""></button>
-                        <button><img src="img/ICONS/align-to-right.png" alt=""></button>
+                        <button>
+                            <img src="img/ICONS/align-to-left.png" alt="" onclick="onChangeAlign('left')">
+                        </button>
+                        <button>
+                            <img src="img/ICONS/center-text-alignment.png" alt="" onclick="onChangeAlign('center')">
+                        </button>
+                        <button>
+                            <img src="img/ICONS/align-to-right.png" alt="" onclick="onChangeAlign('right')">
+                        </button>
                     </div>
                     <div>
                         <select name="" id="" onchange="onChangeFont(this.value)">
