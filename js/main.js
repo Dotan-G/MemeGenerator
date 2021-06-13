@@ -117,6 +117,7 @@ function onChangeStrokeColor(value) {
     changeStrokeColor(value, idx)
     renderCanvas()
 }
+
 function onChangeTextColor(value) {
     var meme = getMeme()
     var idx = meme.selectedLineIdx

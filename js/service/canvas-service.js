@@ -18,20 +18,21 @@ function alignOnCanvas(memeLine, idx, width) {
 }
 
 function drewTextOnCanvas() {
-    var memeLines = getMeme().lines;
-    memeLines.forEach((memeTxt, idx) => {
+    var meme = getMeme();
+    var memeLines = meme.lines
+    memeLines.forEach((line, idx) => {
         const pos = (!idx) ? 'top' : 'bottom';
         const width = gCanvas.width;
         const align = alignOnCanvas(memeLines, idx, width)
         const height = gCanvas.height;
         if (!idx) {
-            drawRect(0, 0, width, memeLines[idx].size)
-            drawText(memeTxt.txt, align, idx * height, pos, memeLines[idx].size,
+            if (meme.selectedLineIdx === idx) drawRect(0, 0, width, memeLines[idx].size)
+            drawText(line.txt, align, idx * height, pos, memeLines[idx].size,
                 memeLines[idx].color, memeLines[idx].strokeColor, memeLines[idx].font, memeLines[idx].align)
         }
         else {
-            drawRect(0, (1 / idx * height) - memeLines[idx].size, width, memeLines[idx].size)
-            drawText(memeTxt.txt, align, 1 / idx * height, pos, memeLines[idx].size,
+            if (meme.selectedLineIdx === idx) drawRect(0, (1 / idx * height) - memeLines[idx].size, width, memeLines[idx].size)
+            drawText(line.txt, align, 1 / idx * height, pos, memeLines[idx].size,
                 memeLines[idx].color, memeLines[idx].strokeColor, memeLines[idx].font, memeLines[idx].align)
         }
     })
