@@ -1,141 +1,226 @@
 'use strict'
 
-var gElImg;
+let gElImg;
+let gDiffLinePos;
+let gStartPos;
+const gTouchEvs = ['touchstart', 'touchmove', 'touchend']
 
 function init() {
+    renderGallery(false)
     createCanvas()
-    renderGallery()
+    addListeners()
 }
 
-function renderGallery() {
-    var images = getImages()
-    var strHTMLs = images.map((image) => {
+function renderGallery(isSearched, imgs) {
+    let imgsToShow;
+    if (!isSearched) imgsToShow = getImgs()
+    else imgsToShow = imgs
+    let strHTMLs = imgsToShow.map((img) => {
         return `
-        <div>
-            <img id=${image.id} src="${image.url}"" onclick="onImgClick(this)">
+        <div class="img-box">
+            <img id=${img.id} src="${img.url}"" onclick="onImgClick(this)">
         </div>`
     })
-    var elGallery = document.querySelector('.gallery')
+    let elGallery = document.querySelector('.gallery')
     elGallery.innerHTML = strHTMLs.join('');
 }
 
 function onImgClick(elImg) {
     gElImg = elImg;
-    changeMemeImgId(elImg.id)
-    var elGenaretor = document.querySelector('.ganerator')
-    elGenaretor.style.display = 'flex';
-    var elGallery = document.querySelector('.gallery')
-    elGallery.style.display = 'none';
-    resizeCanvas()
+    setMemeImgId(elImg.id)
+    resizeCanvas(elImg.offsetHeight, elImg.offsetWidth)
     drawImg(elImg)
-}
+    let elGenerator = document.querySelector('.generator-container')
+    elGenerator.style.display = 'block';
+    let elGallery = document.querySelector('.gallery-container')
+    elGallery.style.display = 'none';
+    let elSearch = document.querySelector('.search-container')
+    elSearch.style.display = 'none';
+    let elAbout = document.querySelector('.about');
+    elAbout.style.display = 'none';
 
-function onAddLine() {
-    var input = document.querySelector('.text-on-meme')
-    if (!input.value) return
-    clearInput()
-    var meme = getMeme();
-    meme.lines.push({
-        txt: '',
-        size: 60,
-        align: 'center',
-        color: 'white',
-        strokeColor: 'black',
-        font: 'Impact'
-    });
-    changeMemeLineIdx(1)
-}
-
-function onGoBack() {
-    var elGenaretor = document.querySelector('.ganerator')
-    elGenaretor.style.display = 'none';
-    var elGallery = document.querySelector('.gallery')
-    elGallery.style.display = 'flex';
-    clearCanvas()
 }
 
 function onEnterText(inputText) {
     clearCanvas()
-    drawImg(gElImg)
-    var meme = getMeme();
-    var lineIdx = meme.selectedLineIdx
-    meme.lines[lineIdx].txt = inputText;
-    drewTextOnCanvas()
+    let meme = getMeme();
+    let currLine = getCurrLine();
+    let line = meme.lines[currLine];
+    if (!line) {
+        meme.lines.push(getEmptyLineObg());
+        line = meme.lines[currLine];
+    }
+    line.txt = inputText;
+    renderCanvas()
+    onLineSelected()
+}
+
+function onAddLine() {
+    let input = document.querySelector('.text-on-meme')
+    if (!input.value) return
+    clearInput()
+    renderCanvas()
+    let meme = getMeme();
+    if (getCurrLine() < meme.lines.length - 1) return onChangeLinePos();
+    setCurrLine(1);
+    setLineIdx(1);
+    meme.lines.push(getEmptyLineObg());
 }
 
 function onChangeLinePos() {
-    var input = document.querySelector('.text-on-meme')
-    var meme = getMeme();
-    var diff;
-    if (!meme.selectedLineIdx) {
-        diff = 1
-    } else if (meme.selectedLineIdx = meme.lines.length - 1) {
-        diff = -1
+    let input = document.querySelector('.text-on-meme');
+    let meme = getMeme();
+    console.log('before');
+    if (!(meme.lines.length - 1)) return;
+    console.log('after');
+    if (!getCurrLine()) {
+        gDiffLinePos = 1;
+    } else if (getCurrLine() === meme.lines.length - 1 || getCurrLine() === meme.lines.length) {
+        gDiffLinePos = -1;
     }
-    input.value = meme.lines[meme.selectedLineIdx + diff].txt
+    console.log('gDiffLinePos', gDiffLinePos);
+    setCurrLine(gDiffLinePos);
+    input.value = meme.lines[getCurrLine()].txt;
+    onLineSelected()
+    return
+}
+function onLineSelected() {
+    let input = document.querySelector('.text-on-meme');
+    let meme = getMeme();
+    input.value = meme.lines[getCurrLine()].txt;
+    renderCanvas()
+    if (input.value) drawRect(0, meme.lines[getCurrLine()].pos.y - meme.lines[getCurrLine()].size, gCanvas.width, meme.lines[getCurrLine()].size);
+    return
 }
 
-function onTrachClick() {
-    var meme = getMeme();
-    var lineIdx = meme.selectedLineIdx
-    var memeLines = meme.lines
-    if (!lineIdx) {
-        memeLines[lineIdx].txt = '';
-        clearInput()
-    } else {
-        var lineIdx = memeLines.findIndex((line) => {
-            line.txt === memeLines[lineIdx].txt
-        })
-        memeLines.splice(lineIdx, 1)
-        changeMemeLineIdx(-1)
-    }
+function onTrashClick() {
+    let meme = getMeme();
+    let currLine = getCurrLine();
+    if (currLine > 0) setCurrLine(-1)
+    meme.lines.splice(currLine, 1)
+    if (!meme.lines.length) clearInput()
     renderCanvas()
 }
 
 function onChangeFontSize(diff) {
-    var meme = getMeme();
-    changeFontSize(diff, meme.selectedLineIdx);
+    setFontSize(diff);
     renderCanvas()
 }
 
 function onChangeFont(elFont) {
-    var meme = getMeme()
-    var idx = meme.selectedLineIdx
-    changeFont(elFont, idx)
+    setFont(elFont)
     renderCanvas()
 }
 
-function renderCanvas() {
-    clearCanvas()
-    drawImg(gElImg)
-    drewTextOnCanvas()
-}
-
 function onChangeStrokeColor(value) {
-    var meme = getMeme()
-    var idx = meme.selectedLineIdx
-    changeStrokeColor(value, idx)
+    setStrokeColor(value)
     renderCanvas()
 }
 
 function onChangeTextColor(value) {
-    var meme = getMeme()
-    var idx = meme.selectedLineIdx
-    changeTextColor(value, idx)
+    setTextColor(value)
     renderCanvas()
 }
 
 function onChangeAlign(align) {
-    var meme = getMeme()
-    var idx = meme.selectedLineIdx
-    changeAlign(align, idx)
+    let meme = getMeme()
+    let idx = meme.selectedLineIdx
+    setChangeAlign(align, idx)
     renderCanvas()
+}
+
+function onGoBack() {
+    onSearchInput('')
+    let elGenaretor = document.querySelector('.generator-container')
+    elGenaretor.style.display = 'none';
+    let elGallery = document.querySelector('.gallery-container')
+    elGallery.style.display = 'block';
+    let elSearch = document.querySelector('.search-container')
+    elSearch.style.display = 'flex';
+    let elAbout = document.querySelector('.about');
+    elAbout.style.display = 'flex';
+    clearGMeme()
+    clearCanvas()
+}
+
+function renderCanvas() {
+    let input = document.querySelector('.text-on-meme')
+    clearCanvas()
+    drawImg(gElImg)
+    drawTextOnCanvas(input.value)
 }
 
 function onDownloadCanvas(elLink) {
     downloadCanvas(elLink)
 }
 
-function checkevent(ev) {
-    console.log('ev', ev);
+function clearInput() {
+    let input = document.querySelector('.text-on-meme')
+    input.value = ''
+}
+
+function addListeners() {
+    addMouseListeners()
+    addTouchListeners()
+}
+function addMouseListeners() {
+    gCanvas.addEventListener('mousemove', onMove)
+    gCanvas.addEventListener('mousedown', onDown)
+    gCanvas.addEventListener('mouseup', onUp)
+}
+
+function addTouchListeners() {
+    gCanvas.addEventListener('touchmove', onMove)
+    gCanvas.addEventListener('touchstart', onDown)
+    gCanvas.addEventListener('touchend', onUp)
+}
+function onDown(ev) {
+    const pos = getEvPos(ev)
+    if (!isLineClicked(pos)) return
+    setLineDrag(true)
+    gStartPos = pos
+    document.body.style.cursor = 'grabbing'
+}
+function onMove(ev) {
+    const line = getMeme().lines[getCurrLine()];
+    if (line.isDrag) {
+        const pos = getEvPos(ev)
+        const dx = pos.x - gStartPos.x
+        const dy = pos.y - gStartPos.y
+        moveLine(dx, dy)
+        gStartPos = pos
+        renderCanvas()
+    }
+}
+function onUp() {
+    setLineDrag(false);
+    document.body.style.cursor = 'grab';
+    onLineSelected();
+}
+function getEvPos(ev) {
+    let pos = {
+        x: ev.offsetX,
+        y: ev.offsetY
+    }
+    if (gTouchEvs.includes(ev.type)) {
+        console.log('ev.type', ev.type);
+        ev.preventDefault()
+        ev = ev.changedTouches[0]
+        pos = {
+            x: ev.pageX - ev.target.offsetLeft - ev.target.clientLeft,
+            y: ev.pageY - ev.target.offsetTop - ev.target.clientTop
+        }
+    }
+    return pos
+}
+
+function onSearchInput(val) {
+    let y = []
+    let inputText = document.querySelector('.search-input');
+    inputText.value = val;
+    gImgs.forEach(img => {
+        let x = val.toLowerCase()
+        if (img.keywords.join(' ').includes(x)) y.push(img)
+    });
+    return renderGallery(val, y)
 }
